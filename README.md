@@ -1,15 +1,9 @@
 # telegrambot-base
 
-To install dependencies:
+Template code for creating a Telegram bot using [Bun.sh](https://bun.sh/), [grammY](https://grammy.dev/) and [TypeScript](https://www.typescriptlang.org/).
 
-```bash
-bun install
-```
-
-To run:
-
-```bash
-bun run src/main.ts
-```
-
-This project was created using `bun init` in bun v1.1.22. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+### Usage
+- Click 'Use this template' -> Create a new repository
+- Install the dependencies: `bun install`
+- Make your modifications
+- Run the bot: `bun run start`
