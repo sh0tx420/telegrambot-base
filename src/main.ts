@@ -21,8 +21,6 @@ async function InitConfig(): Promise<boolean> {
     cfg = await ReadJson(cfgPath);
 
     if (cfg === undefined) {
-        //await logging.warn(`Failed to read json file: ${cfgPath}`);
-        
         cfg = {
             token: "",
             debug: false
@@ -31,16 +29,17 @@ async function InitConfig(): Promise<boolean> {
         await CreateJsonFromDict(cfgPath, cfg);
     }
 
-    // Validate some config.json fields
     if (cfg.debug) {
         await logging.info("Starting in debug mode!");
     }
 
+    // Fail initializing config if token doesn't exist
     if (!cfg.token || cfg.token == "") {    // Note: !cfg.token check might be useless
         await logging.error("Missing bot token in config file.");
         return false;
     }
 
+    // After this, it's safe to read the file at any point
     return true;
 }
 
@@ -63,6 +62,7 @@ async function main(): Promise<void> {
 
     const bot = new Bot(cfg.token);
 
+    await HandleCommands(bot);
     await bot.init();
 
     await bot.start({ onStart: OnStart });
