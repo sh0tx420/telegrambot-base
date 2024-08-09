@@ -11,8 +11,6 @@ import logging from "./logging";    // Utilities
  * @param dict Dictionary/JSON object to copy into the file
  */
 export async function CreateJsonFromDict(fpath: string, dict: any): Promise<void> {
-    let data;
-    
     // Check if the JSON file exists
     const fileExists = await exists(fpath);
     if (!fileExists) {
@@ -21,7 +19,7 @@ export async function CreateJsonFromDict(fpath: string, dict: any): Promise<void
 
         try {
             // Convert the interface to JSON data for filling in empty data
-            data = JSON.stringify(dict, null, 4);
+            const data = JSON.stringify(dict, null, 4);
 
             // Create the file
             await writeFile(fpath, data, { encoding: "utf-8" });
