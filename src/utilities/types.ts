@@ -1,7 +1,8 @@
 // Custom types, interfaces, etc for the application
+import type { Context } from "grammy";
 
 /* Types */
-type BotCmdFunction = () => void;
+type BotCmdFunction = (ctx: Context, args: string[]) => void;
 
 /* Interfaces */
 export interface ICommand {
