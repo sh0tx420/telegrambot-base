@@ -9,6 +9,7 @@ Template code for creating a Telegram bot using [Bun.sh](https://bun.sh/), [gram
 
 ### Usage
 - Click 'Use this template' -> Create a new repository
+- Clone the repository you created
 - Install the dependencies: `bun install`
 - Make your modifications
 - Run the bot: `bun run start`
