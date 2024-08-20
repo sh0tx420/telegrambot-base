@@ -21,9 +21,11 @@ async function InitConfig(): Promise<boolean> {
     cfg = await ReadJson(cfgPath);
 
     if (cfg === undefined) {
+        // Base config.json keys
         cfg = {
             token: "",
-            debug: false
+            debug: false,
+            prefix: ""
         };
     
         await CreateJsonFromDict(cfgPath, cfg);
@@ -33,9 +35,21 @@ async function InitConfig(): Promise<boolean> {
         await logging.info("Starting in debug mode!");
     }
 
+    
+
+    // Fail initializing if config keys don't exist
+    const keys1 = Object.keys(cfg);
+    const keys2 = Object.keys(cfg);
+    const bAllKeysExist = keys1.every(key => keys2.includes(key));
+    
+    if (!bAllKeysExist) {
+        await logging.error("Missing key in config.json");
+        return false;
+    }
+
     // Fail initializing config if token doesn't exist
-    if (!cfg.token || cfg.token == "") {    // Note: !cfg.token check might be useless
-        await logging.error("Missing bot token in config file.");
+    if (cfg.token == "" || cfg.prefix == "") {    // Note: !cfg.token check might be useless
+        await logging.error("Missing bot token or prefix in config file.");
         return false;
     }
 

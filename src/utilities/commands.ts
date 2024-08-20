@@ -1,12 +1,13 @@
-import type { ICommand } from "./types";    // Types
+import type { ICommand, IJSONConfig } from "./types";   // Types
 import type { Context } from "grammy";
 
-import path from "path";                    // stdlib
+import path from "path";                                // stdlib
 import fs from "fs/promises";
 
-import { Bot } from "grammy";               // 3rd-party deps
+import { Bot } from "grammy";                           // 3rd-party deps
 
-import logging from "./logging";            // Utilities
+import logging from "./logging";                        // Utilities
+import { ReadJson } from "./json";
 
 
 /* Functions */
@@ -49,13 +50,17 @@ export default async function HandleCommands(bot: Bot): Promise<void> {
     // Add commands from commands/ folder to 'cmds' array
     await ImportCommands(cmds);
 
+    // Load config.json
+    const cfgPath: string = path.resolve(__dirname, "..", "..", "config.json");
+    const cfg: IJSONConfig = await ReadJson(cfgPath);
+
     // Listen to message event
     bot.on("msg", async (ctx: Context) => {
         if (!ctx.from || !ctx.message)
             return;
 
         // TODO: allow multiple prefixes
-        if (!ctx.message.text?.startsWith("."))
+        if (!ctx.message.text?.startsWith(cfg.prefix))
             return; // Ignore message if it doesn't start with cmd prefix
 
         // Command logic

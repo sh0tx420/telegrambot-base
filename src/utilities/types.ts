@@ -13,5 +13,6 @@ export interface ICommand {
 // JSON interfaces
 export interface IJSONConfig {
     token: string,      // String token of the bot
-    debug: boolean      // Debug enabled?
+    debug: boolean,     // Debug enabled?
+    prefix: string      // Command prefix to use for the bot
 }
