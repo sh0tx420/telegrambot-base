@@ -34,6 +34,8 @@ async function ImportCommands(cmds: ICommand[]): Promise<void> {
         // the debug mode is enabled
         await logging.debug(`Loading command: ${command.name}`);
     }
+
+    await logging.debug(`Loaded ${cmds.length}/${commandFiles.length} commands`);
 }
 
 /**
