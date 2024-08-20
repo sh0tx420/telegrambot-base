@@ -68,7 +68,7 @@ export default async function HandleCommands(bot: Bot): Promise<void> {
         const cmd = cmds.find(cmd => cmd.name === cmdName);
 
         if (cmd) {
-            cmd.fn(ctx, args);
+            await cmd.fn(ctx, args);
         }
     });
 }

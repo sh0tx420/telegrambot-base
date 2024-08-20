@@ -2,7 +2,7 @@
 import type { Context } from "grammy";
 
 /* Types */
-type BotCmdFunction = (ctx: Context, args: string[]) => void;
+type BotCmdFunction = (ctx: Context, args: string[]) => Promise<void>;
 
 /* Interfaces */
 export interface ICommand {
